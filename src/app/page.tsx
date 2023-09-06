@@ -34,7 +34,7 @@ const shirts: ProductItem[] = [
 
 export default function Home() {
 	return (
-		<section>
+		<section className="flex min-h-screen flex-col items-center justify-evenly p-24">
 			<ProductList products={shirts} />
 		</section>
 	);
