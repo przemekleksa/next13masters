@@ -22,7 +22,7 @@ export const ActiveLink = ({ href, children }: ActiveLinkProps) => {
 			href={href}
 			className={clsx(
 				"cursor-pointer text-blue-300 hover:text-blue-600",
-				isActive && "border-bottom-2 border-orange-500 text-orange-500",
+				isActive && "border-b border-orange-500 text-orange-500",
 			)}
 		>
 			{children}
