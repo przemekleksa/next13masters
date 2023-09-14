@@ -13,7 +13,7 @@ interface ActiveLinkProps {
 	exact: boolean;
 }
 
-export const ActiveLink = ({ href, children, exact }: ActiveLinkProps) => {
+export const ActiveLink = ({ href, children }: ActiveLinkProps) => {
 	const pathname = usePathname();
 	const isActive = pathname === href;
 
