@@ -19,7 +19,7 @@ export const ProductItemDescription = ({ product, className }: ProductListItemDe
 	return (
 		<div className={clsx("mt-3 flex max-w-xs flex-col justify-start", className)}>
 			<div className="flex justify-between">
-				<h2 className="flex justify-start text-sm font-bold text-gray-500">{product.name}</h2>
+				<h1 className="flex justify-start text-xl font-bold text-gray-500">{product.name}</h1>
 				<p className="flex justify-start text-sm text-gray-300">
 					<span className="sr-only">Category</span>
 					{product.category}
