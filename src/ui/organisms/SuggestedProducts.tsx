@@ -7,5 +7,10 @@ export const SuggestedProducts = async () => {
 	const products = await getProductsList({ numberOfProducts: 20 });
 	await sleep(1000);
 	// return <ProductList products={products.slice(-4)} />;
-	return <ProductList products={products.filter((product) => product.category === "Books")} />;
+	return (
+		<ProductList
+			products={products.filter((product) => product.category === "Books")}
+			currentPage={0}
+		/>
+	);
 };
