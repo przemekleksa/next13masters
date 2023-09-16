@@ -8,6 +8,8 @@ export interface ProductItem {
 		alt: string;
 		src: string;
 	};
+	longDescription: string;
+	rating: Rating;
 }
 
 export type ProductResponseList = ProductResponseItem[];

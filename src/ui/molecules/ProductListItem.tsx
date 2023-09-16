@@ -9,13 +9,13 @@ export interface ProductListItemProps {
 
 export const ProductListItem = ({ product }: ProductListItemProps) => {
 	return (
-		<li key={product.coverImage.alt}>
+		<li key={product.coverImage.alt} className="m-4 border border-dashed border-black p-4">
 			<Link href={`/product/${product.id}`}>
-				<article>
+				<article className="flex h-full flex-col justify-between">
+					<ProductCoverImage src={product.coverImage.src} alt={product.coverImage.alt} />{" "}
 					<ProductListItemDescription
 						product={{ category: product.category, name: product.name, price: product.price }}
 					/>
-					<ProductCoverImage src={product.coverImage.src} alt={product.coverImage.alt} />
 				</article>
 			</Link>
 		</li>

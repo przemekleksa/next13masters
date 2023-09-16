@@ -11,7 +11,7 @@ interface ProductListItemDescriptionProps {
 
 export const ProductListItemDescription = ({ product }: ProductListItemDescriptionProps) => {
 	return (
-		<div className="fex mt-3 justify-evenly">
+		<div className="mt-3 flex  justify-evenly">
 			<div>
 				<h3 className="text-sm font-bold text-gray-500">{product.name}</h3>
 				<p className="text-sm text-gray-300">

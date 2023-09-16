@@ -13,6 +13,8 @@ const productResponseItemToProductItem = (
 			src: productResponseItem.image,
 			alt: productResponseItem.title,
 		},
+		longDescription: productResponseItem.longDescription,
+		rating: productResponseItem.rating,
 	};
 };
 

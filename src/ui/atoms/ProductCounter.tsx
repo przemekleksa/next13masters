@@ -13,12 +13,7 @@ export const ProductCounter = ({ children }: ProductCounterProps) => {
 			<button onClick={() => setCounter(counter - 1)} className="border border-slate-300 px-4">
 				-
 			</button>
-			<input
-				type="text"
-				readOnly
-				value={counter}
-				className="border border-slate-300 px-4 text-center"
-			/>
+			<input type="text" readOnly value={counter} className="border border-slate-300 px-4 " />
 			<button onClick={() => setCounter(counter + 1)} className="border border-slate-300 px-4">
 				+
 			</button>
