@@ -4,7 +4,7 @@ export interface ProductItem {
 	description: string;
 	category: string;
 	price: number;
-	coverImage: {
+	coverImage?: {
 		alt: string;
 		src: string;
 	};
