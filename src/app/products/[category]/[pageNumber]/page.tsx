@@ -1,5 +1,6 @@
-import { getProductsListByOffset } from "@/api/products";
+import { notFound } from "next/navigation";
 import { ProductList } from "@/ui/organisms/ProductList";
+import { getProductsByCategorySlug } from "@/api/products";
 
 interface GenerateStaticParamsProps {
 	params: {
@@ -18,18 +19,23 @@ export const generateStaticParams = async ({ params }: GenerateStaticParamsProps
 export default async function SingleCategoryProductPage({
 	params,
 }: {
-	params: { pageNumber: string };
+	params: { pageNumber: string; category: string };
 }) {
-	const { pageNumber } = params;
+	const products = await getProductsByCategorySlug(params.category);
 
-	const products = await getProductsListByOffset({
-		numberOfProducts: 20,
-		offset: Number(pageNumber),
-	});
+	if (!products) {
+		notFound();
+	}
+
+	// console.log(products);
 
 	return (
 		<section className="flex min-h-screen flex-col items-center justify-evenly p-4">
-			<ProductList products={products} showMore currentPage={Number(pageNumber)} />
+			<h1>
+				Produkty z kategorii {params.category}, strona {params.pageNumber}
+			</h1>
+			{/* <pre>{JSON.stringify(products, null, 2)}</pre> */}
+			<ProductList products={products} showMore currentPage={Number(params.pageNumber)} />
 		</section>
 	);
 }

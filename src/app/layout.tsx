@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ActiveLink } from "@/ui/atoms/ActiveLink";
+import { NavBar } from "@/ui/organisms/NavBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,18 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html lang="pl">
 			<body className={inter.className}>
 				<nav role="navigation">
-					<ul className="mx-4 mt-2 flex justify-end gap-3">
-						<li className="cursor-pointer text-blue-300 hover:text-blue-600">
-							<ActiveLink href="/" exact>
-								Home
-							</ActiveLink>
-						</li>
-						<li className="cursor-pointer text-blue-300 hover:text-blue-600">
-							<ActiveLink href="/products" exact>
-								All
-							</ActiveLink>
-						</li>
-					</ul>
+					<NavBar />
 				</nav>
 				<section className="lg:max-w-7x; mx-auto max-w-md p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl">
 					{children}

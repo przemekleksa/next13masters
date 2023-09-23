@@ -11,6 +11,7 @@ export const SuggestedProducts = async () => {
 		<ProductList
 			products={products.filter((product) => product.category === "Books")}
 			currentPage={0}
+			hidePagination
 		/>
 	);
 };

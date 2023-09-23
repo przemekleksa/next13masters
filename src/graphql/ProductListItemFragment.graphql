@@ -1,0 +1,6 @@
+fragment ProductListItem on Product {
+	...ProductListItemDescription_Product
+	images(first: 1) {
+		url
+	}
+}

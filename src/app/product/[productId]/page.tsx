@@ -27,10 +27,11 @@ export const generateMetadata = async ({
 };
 
 export default async function ProductDetailsPage({
-	params, // searchParams,
+	params,
+	searchParams,
 }: ProductDetailsPageProps) {
 	const product = await getProductDetailsById(params.productId);
-
+	console.log(searchParams, "searchParams");
 	return (
 		<>
 			<article className="flex justify-center">
