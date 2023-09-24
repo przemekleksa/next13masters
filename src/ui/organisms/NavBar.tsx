@@ -1,11 +1,12 @@
 import React from "react";
 import { ShoppingCart } from "lucide-react";
+import { type Route } from "next";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 
 const navLinks = [
 	{ href: "/", label: "Home" },
 	{ href: "/products", label: "All" },
-	{ href: "/products/tshirts", label: "T-Shirts" },
+	{ href: "/products/t-shirts", label: "T-Shirts" },
 	{ href: "/products/hoodies", label: "Hoodies" },
 	{ href: "/products/accessories", label: "Accessories" },
 ];
@@ -14,14 +15,16 @@ export const NavBar = () => {
 	return (
 		<div className="fixed flex w-full items-center justify-between bg-gray-200 pb-2 opacity-90">
 			<ul className="mx-4 mt-2 flex justify-end gap-3">
-				{/* {navLinks.map(({ href, label }) => (
-					<li key={href} className="cursor-pointer text-blue-300 hover:text-blue-600">
-						<ActiveLink href={href} exact>
-							{label}
-						</ActiveLink>
-					</li>
-				))} */}
-				<li className="cursor-pointer text-blue-300 hover:text-blue-600">
+				{navLinks.map(({ href, label }) => {
+					return (
+						<li key={href} className="cursor-pointer text-blue-300 hover:text-blue-600">
+							<ActiveLink href={href as Route<string>} exact>
+								{label}
+							</ActiveLink>
+						</li>
+					);
+				})}
+				{/* <li className="cursor-pointer text-blue-300 hover:text-blue-600">
 					<ActiveLink href="/" exact>
 						Home
 					</ActiveLink>
@@ -45,7 +48,7 @@ export const NavBar = () => {
 					<ActiveLink href="/products/accessories" exact>
 						Accessories
 					</ActiveLink>
-				</li>
+				</li> */}
 			</ul>
 			<ShoppingCart className="mx-4 h-6 w-6 flex-shrink-0" />
 		</div>

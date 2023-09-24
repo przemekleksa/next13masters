@@ -1,8 +1,6 @@
 import { notFound } from "next/navigation";
-import { executeGraphql } from "@/api/graphqlApi";
-import { ProductsGetByCategorySlugDocument } from "@/gql/graphql";
 import { ProductList } from "@/ui/organisms/ProductList";
-import { getProductsByCategorySlug, getProductsListByOffset } from "@/api/products";
+import { getProductsByCategorySlug } from "@/api/products";
 
 interface GenerateStaticParamsProps {
 	params: {

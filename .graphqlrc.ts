@@ -21,7 +21,7 @@ const config: CodegenConfig = {
 			},
 			plugins: [],
 			presetConfig: {
-				fragmentMasking: { unmaskFunctionName: "getFragmentData" },
+				fragmentMasking: false,
 			},
 		},
 	},

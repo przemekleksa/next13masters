@@ -3,7 +3,7 @@ import { ProductList } from "@/ui/organisms/ProductList";
 
 export default async function Products({ params }: { params: { pageNumber: string } }) {
 	// const products = await getProductsList({ numberOfProducts: 20 });
-	const products = await getProductsList({ numberOfProducts: 20 });
+	const products = await getProductsList();
 	const { pageNumber } = params;
 
 	return (

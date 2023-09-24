@@ -1,10 +1,10 @@
 import React from "react";
 import { ProductListItem } from "@/ui/molecules/ProductListItem";
-import { type ProductItem } from "@/ui/types";
 import { Pagination } from "@/ui/atoms/Pagination";
+import { type ProductListItemFragment } from "@/gql/graphql";
 
 interface ProductListProps {
-	products: ProductItem[];
+	products: ProductListItemFragment[];
 	showMore?: boolean;
 	currentPage: number;
 }
