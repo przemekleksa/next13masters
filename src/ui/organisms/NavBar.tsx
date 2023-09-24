@@ -6,9 +6,9 @@ import { ActiveLink } from "@/ui/atoms/ActiveLink";
 const navLinks = [
 	{ href: "/", label: "Home" },
 	{ href: "/products", label: "All" },
-	{ href: "/products/t-shirts", label: "T-Shirts" },
-	{ href: "/products/hoodies", label: "Hoodies" },
-	{ href: "/products/accessories", label: "Accessories" },
+	{ href: "/categories/t-shirts", label: "T-Shirts" },
+	{ href: "/categories/hoodies", label: "Hoodies" },
+	{ href: "/categories/accessories", label: "Accessories" },
 ];
 
 export const NavBar = () => {
