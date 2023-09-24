@@ -1,4 +1,5 @@
-import { ProductsGetListDocument, type TypedDocumentString } from "@/gql/graphql";
+import { executeGraphql } from "@/api/graphqlApi";
+import { ProductsGetByCategorySlugDocument, ProductsGetListDocument } from "@/gql/graphql";
 import { type ProductResponseItem, type ProductItem, type ProductResponseList } from "@/ui/types";
 
 const productResponseItemToProductItem = (
@@ -85,34 +86,6 @@ export const getProductsList = async (): Promise<ProductItem[]> => {
 	return products;
 };
 
-const executeGraphql = async <TResult, TVariables>(
-	query: TypedDocumentString<TResult, TVariables>,
-	variables: TVariables,
-): Promise<TResult> => {
-	if (!process.env.GRAPHQL_URL) {
-		throw new Error("GRAPHQL_URL is not defined");
-	}
-	const res = await fetch(process.env.GRAPHQL_URL, {
-		method: "POST",
-		body: JSON.stringify({
-			query,
-			variables,
-		}),
-		headers: { "Content-Type": "application/json" },
-	});
-
-	type GraphqlResponse<T> =
-		| { data?: undefined; errors: { message: string }[] }
-		| { data: T; errors?: undefined };
-
-	const graphqlResponse = (await res.json()) as GraphqlResponse<TResult>;
-
-	if (graphqlResponse.errors) {
-		throw new Error(`GraphQL error:`, { cause: graphqlResponse.errors });
-	}
-	return graphqlResponse.data;
-};
-
 export const getProductDetailsById = async (
 	productId: ProductResponseItem["id"],
 ): Promise<ProductItem> => {
@@ -134,5 +107,26 @@ export const getProductsListByOffset = async ({
 	);
 	const productsResponse = (await res.json()) as ProductResponseList;
 	const products = productsResponse.map(productResponseItemToProductItem);
+	return products;
+};
+
+export const getProductsByCategorySlug = async (categorySlug: string) => {
+	const data = await executeGraphql(ProductsGetByCategorySlugDocument, { slug: categorySlug });
+	const products = data.categories[0]?.products.map((product) => ({
+		id: product.id,
+		name: product.name,
+		description: product.description,
+		category: product.categories[0]?.name || "",
+		price: product.price,
+		coverImage: product.images[0] && {
+			src: product.images[0]?.url,
+			alt: product.name,
+		},
+		longDescription: "longDescription",
+		rating: {
+			rate: 5,
+			count: 1,
+		},
+	}));
 	return products;
 };
