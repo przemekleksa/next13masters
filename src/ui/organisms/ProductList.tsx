@@ -7,9 +7,15 @@ interface ProductListProps {
 	products: ProductListItemFragment[];
 	showMore?: boolean;
 	currentPage: number;
+	isPagination?: boolean;
 }
 
-export const ProductList = ({ products, showMore, currentPage }: ProductListProps) => {
+export const ProductList = ({
+	products,
+	showMore,
+	currentPage,
+	isPagination = true,
+}: ProductListProps) => {
 	const totalPages = 10;
 	const basePath = "products/";
 	return (
@@ -19,7 +25,9 @@ export const ProductList = ({ products, showMore, currentPage }: ProductListProp
 					<ProductListItem product={product} key={product.id} />
 				))}
 			</ul>
-			<Pagination totalPages={totalPages} basePath={basePath} currentPage={currentPage} />
+			{isPagination && (
+				<Pagination totalPages={totalPages} basePath={basePath} currentPage={currentPage} />
+			)}
 			{showMore && <button className="mt-6 rounded bg-black px-6 py-3 text-white">See More</button>}
 		</>
 	);

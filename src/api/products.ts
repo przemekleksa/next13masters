@@ -3,8 +3,8 @@ import {
 	type ProductListItemFragment,
 	ProductsGetByCategorySlugDocument,
 	ProductsGetListDocument,
+	ProductGetByIdDocument,
 } from "@/gql/graphql";
-import { type ProductResponseItem, type ProductResponseList } from "@/ui/types";
 
 // const productResponseItemToProductItem = (
 // 	productResponseItem: ProductResponseItem,
@@ -59,24 +59,27 @@ export const getProductsList = async () => {
 
 export const getProductDetailsById = async (productId: ProductListItemFragment["id"]) => {
 	// todo: GRAPHQL
-	console.log(productId);
-	throw new Error("Not implemented");
+	// console.log(productId);
+	const graphqlResponse = await executeGraphql(ProductGetByIdDocument, { id: productId });
+	// console.log(graphqlResponse.products);
+	// throw new Error("Not implemented");
+	return graphqlResponse.product;
 };
 
-export const getProductsListByOffset = async ({
-	numberOfProducts,
-	offset,
-}: {
-	numberOfProducts: number;
-	offset: number;
-}): Promise<ProductItem[]> => {
-	const res = await fetch(
-		`https://naszsklep-api.vercel.app/api/products?take=${numberOfProducts}&offset=${offset}`,
-	);
-	const productsResponse = (await res.json()) as ProductResponseList;
-	const products = productsResponse.map(productResponseItemToProductItem);
-	return products;
-};
+// export const getProductsListByOffset = async ({
+// 	numberOfProducts,
+// 	offset,
+// }: {
+// 	numberOfProducts: number;
+// 	offset: number;
+// }): Promise<ProductItem[]> => {
+// 	const res = await fetch(
+// 		`https://naszsklep-api.vercel.app/api/products?take=${numberOfProducts}&offset=${offset}`,
+// 	);
+// 	const productsResponse = (await res.json()) as ProductResponseList;
+// 	const products = productsResponse.map(productResponseItemToProductItem);
+// 	return products;
+// };
 
 export const getProductsByCategorySlug = async (categorySlug: string) => {
 	const graphqlResponse = await executeGraphql(ProductsGetByCategorySlugDocument, {

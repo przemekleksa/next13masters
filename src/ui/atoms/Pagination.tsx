@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import React from "react";
+import { type Route } from "next";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 
 interface PaginationProps {
@@ -29,9 +30,9 @@ export const Pagination = ({ currentPage, totalPages = 20, basePath }: Paginatio
 					}
 				>
 					{currentPage === page ? (
-						<ActiveLink href={`/products/${page}`}>{page}</ActiveLink>
+						<ActiveLink href={`/products/${page}` as Route<string>}>{page}</ActiveLink>
 					) : (
-						<Link href={`/products/${page}`}>{page}</Link>
+						<Link href={`/products/${page}` as Route<string>}>{page}</Link>
 					)}
 				</button>
 			))}
