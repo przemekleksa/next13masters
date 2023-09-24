@@ -12,7 +12,6 @@ interface PaginationProps {
 
 export const Pagination = ({ currentPage, totalPages = 20, basePath }: PaginationProps) => {
 	const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
-	console.log(currentPage);
 
 	return (
 		<div className="pagination flex w-1/2 justify-between rounded" aria-label="pagination">
