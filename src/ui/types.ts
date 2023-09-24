@@ -1,16 +1,16 @@
-export interface ProductItem {
-	id: string;
-	name: string;
-	description: string;
-	category: string;
-	price: number;
-	coverImage: {
-		alt: string;
-		src: string;
-	};
-	longDescription: string;
-	rating: Rating;
-}
+// export interface ProductItem {
+// 	id: string;
+// 	name: string;
+// 	description: string;
+// 	category: string;
+// 	price: number;
+// 	coverImage?: {
+// 		alt: string;
+// 		src: string;
+// 	};
+// 	longDescription: string;
+// 	rating: Rating;
+// }
 
 export type ProductResponseList = ProductResponseItem[];
 

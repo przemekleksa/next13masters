@@ -41,6 +41,14 @@
 			}
 		],
 
+		"no-restricted-imports": [
+			"error",
+			{
+				"name": "next/router",
+				"message": "Please use `next/navigation` instead."
+			}
+		],
+
 		"import/no-duplicates": ["error", { "prefer-inline": true }],
 
 		// false negatives

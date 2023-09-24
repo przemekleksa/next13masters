@@ -12,7 +12,7 @@ interface ProductDetailsPageProps {
 }
 
 export const generateStaticParams = async () => {
-	const products = await getProductsList({ numberOfProducts: 20 });
+	const products = await getProductsList();
 	return products.map((product) => ({ productId: product.id }));
 	// return products.map((product) => ({ productId: product.id })).slice(0, 3);
 };
@@ -22,19 +22,28 @@ export const generateMetadata = async ({
 }: {
 	params: { productId: string };
 }): Promise<Metadata> => {
-	const { name, description } = await getProductDetailsById(params.productId);
-	return { title: name, description, openGraph: { title: name, description } };
+	const product = await getProductDetailsById(params.productId);
+	return {
+		title: product?.name,
+		description: product?.description,
+		openGraph: { title: product?.name, description: product?.description },
+	};
 };
 
 export default async function ProductDetailsPage({
 	params, // searchParams,
 }: ProductDetailsPageProps) {
+	// const product = await getProductDetailsById(params.productId);
 	const product = await getProductDetailsById(params.productId);
+
+	if (!product) {
+		return <Spinner />;
+	}
 
 	return (
 		<>
 			<article className="flex justify-center">
-				<ProductCoverImage {...product.coverImage} />
+				{product.images[0] && <ProductCoverImage src={product?.images[0].url} alt={product.name} />}
 				<ProductItemDescription product={product} className="ml-4" />
 			</article>
 			<aside className="mt-16 flex justify-center">

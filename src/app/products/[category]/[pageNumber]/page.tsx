@@ -1,5 +1,6 @@
-import { getProductsListByOffset } from "@/api/products";
+import { notFound } from "next/navigation";
 import { ProductList } from "@/ui/organisms/ProductList";
+import { getProductsByCategorySlug } from "@/api/products";
 
 interface GenerateStaticParamsProps {
 	params: {
@@ -18,17 +19,24 @@ export const generateStaticParams = async ({ params }: GenerateStaticParamsProps
 export default async function SingleCategoryProductPage({
 	params,
 }: {
-	params: { pageNumber: string };
+	params: { pageNumber: string; category: string };
 }) {
-	const { pageNumber } = params;
+	const { pageNumber, category } = params;
 
-	const products = await getProductsListByOffset({
-		numberOfProducts: 20,
-		offset: Number(pageNumber),
-	});
+	// const products = await getProductsListByOffset({
+	// 	numberOfProducts: 20,
+	// 	offset: Number(pageNumber),
+	// });
+
+	const products = await getProductsByCategorySlug(category);
+
+	if (!products) {
+		throw notFound();
+	}
 
 	return (
 		<section className="flex min-h-screen flex-col items-center justify-evenly p-4">
+			<pre>{`hello, you are on ${category} on page number ${pageNumber}`}</pre>
 			<ProductList products={products} showMore currentPage={Number(pageNumber)} />
 		</section>
 	);
