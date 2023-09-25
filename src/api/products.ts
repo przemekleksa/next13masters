@@ -4,6 +4,7 @@ import {
 	ProductsGetByCategorySlugDocument,
 	ProductsGetListDocument,
 	ProductGetByIdDocument,
+	ProductVariantBySizeAndColorDocument,
 } from "@/gql/graphql";
 
 export const getProductsList = async () => {
@@ -21,4 +22,11 @@ export const getProductsByCategorySlug = async (categorySlug: string) => {
 		slug: categorySlug,
 	});
 	return graphqlResponse.categories[0]?.products;
+};
+
+export const getProductVariantsById = async (productId: ProductListItemFragment["id"]) => {
+	const graphqlResponse = await executeGraphql(ProductVariantBySizeAndColorDocument, {
+		id: productId,
+	});
+	return graphqlResponse;
 };

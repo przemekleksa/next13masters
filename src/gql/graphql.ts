@@ -10731,6 +10731,13 @@ export type ProductGetByIdQueryVariables = Exact<{
 
 export type ProductGetByIdQuery = { product?: { id: string, name: string, description: string, price: number, collections: Array<{ name: string }>, categories: Array<{ name: string }>, images: Array<{ url: string }> } | null };
 
+export type ProductVariantBySizeAndColorQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type ProductVariantBySizeAndColorQuery = { product?: { name: string, id: string } | null, productColorVariants: Array<{ color: ProductColor, name: string, id: string }>, productSizeColorVariants: Array<{ color: ProductColor, size: ProductSize, name: string, id: string }> };
+
 export type ProductListFragmentFragment = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
 
 export type ProductListItemFragment = { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> };
@@ -10827,7 +10834,7 @@ export const CollectionsListFragmentFragmentDoc = new TypedDocumentString(`
     `, {"fragmentName":"CollectionsListFragment"}) as unknown as TypedDocumentString<CollectionsListFragmentFragment, unknown>;
 export const ProductListFragmentFragmentDoc = new TypedDocumentString(`
     fragment ProductListFragment on Query {
-  products(first: 10) {
+  products(first: 20) {
     ...ProductListItem
   }
 }
@@ -10882,6 +10889,25 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
   }
   price
 }`) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
+export const ProductVariantBySizeAndColorDocument = new TypedDocumentString(`
+    query ProductVariantBySizeAndColor($id: ID!) {
+  product(where: {id: $id}) {
+    name
+    id
+  }
+  productColorVariants {
+    color
+    name
+    id
+  }
+  productSizeColorVariants {
+    color
+    size
+    name
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<ProductVariantBySizeAndColorQuery, ProductVariantBySizeAndColorQueryVariables>;
 export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
     query ProductsGetByCategorySlug($slug: String!) {
   categories(where: {slug: $slug}) {
@@ -10941,7 +10967,7 @@ export const ProductsGetListDocument = new TypedDocumentString(`
   ...ProductListFragment
 }
     fragment ProductListFragment on Query {
-  products(first: 10) {
+  products(first: 20) {
     ...ProductListItem
   }
 }

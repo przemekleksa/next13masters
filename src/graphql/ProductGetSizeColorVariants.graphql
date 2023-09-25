@@ -1,0 +1,17 @@
+query ProductVariantBySizeAndColor($id: ID!) {
+	product(where: { id: $id }) {
+		name
+		id
+	}
+	productColorVariants {
+		color
+		name
+		id
+	}
+	productSizeColorVariants {
+		color
+		size
+		name
+		id
+	}
+}
