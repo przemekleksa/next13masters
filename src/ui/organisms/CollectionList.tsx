@@ -2,22 +2,27 @@ import React from "react";
 
 import { notFound } from "next/navigation";
 import { type CollectionItemFragment } from "@/gql/graphql";
+import { ProductList } from "@/ui/organisms/ProductList";
 
 interface CollectionListProps {
-	collection: CollectionItemFragment;
+	collection: CollectionItemFragment[];
+	pageNumber: string;
 }
 
-export const CollectionList = ({ collection }: CollectionListProps) => {
-	console.log(collection);
-	if (!collection) {
+export const CollectionList = ({ collection, pageNumber }: CollectionListProps) => {
+	if (!collection[0]) {
 		notFound();
 		return null;
 	}
-	console.log(collection[0]);
+
 	return (
-		<>
-			elo
-			{collection[0] && <h1>{collection[0].name}</h1>}
-		</>
+		<div>
+			<div className="mb-6">
+				<h1 className="text-3xl">{collection[0].name}</h1>
+				<div>{collection[0].description}</div>
+			</div>
+
+			<ProductList products={collection[0].products} showMore currentPage={Number(pageNumber)} />
+		</div>
 	);
 };

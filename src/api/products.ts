@@ -8,7 +8,6 @@ import {
 
 export const getProductsList = async () => {
 	const graphqlResponse = await executeGraphql(ProductsGetListDocument, {});
-
 	return graphqlResponse.products;
 };
 

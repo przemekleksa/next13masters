@@ -1,0 +1,12 @@
+fragment CollectionsListFragment on Collection {
+	id
+	name
+	description
+	slug
+	image {
+		url
+		size
+		width
+		height
+	}
+}

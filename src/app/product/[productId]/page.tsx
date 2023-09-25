@@ -39,7 +39,7 @@ export default async function ProductDetailsPage({
 	if (!product) {
 		return <Spinner />;
 	}
-
+	console.log(product);
 	return (
 		<>
 			<article className="flex justify-center">

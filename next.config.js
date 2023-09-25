@@ -40,6 +40,21 @@ const nextConfig = {
 				destination: "/categories/accessories/1",
 				permanent: false,
 			},
+			{
+				source: "/collections/summer-vibes",
+				destination: "/collections/summer-vibes/1",
+				permanent: false,
+			},
+			{
+				source: "/collections/new-arrivals",
+				destination: "/collections/new-arrivals/1",
+				permanent: false,
+			},
+			{
+				source: "/collections/elegant-extras",
+				destination: "/collections/elegant-extras/1",
+				permanent: false,
+			},
 		];
 	},
 };

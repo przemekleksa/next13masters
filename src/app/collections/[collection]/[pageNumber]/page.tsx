@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import { ProductList } from "@/ui/organisms/ProductList";
 import { getProductsByCollectionSlug } from "@/api/collections";
 import { CollectionList } from "@/ui/organisms/CollectionList";
 
@@ -22,7 +21,7 @@ export default async function SingleCategoryProductPage({
 }: {
 	params: { pageNumber: string; collection: string };
 }) {
-	const { pageNumber, collection } = params;
+	const { collection, pageNumber } = params;
 	const products = await getProductsByCollectionSlug(collection);
 	if (!products) {
 		throw notFound();
@@ -30,9 +29,9 @@ export default async function SingleCategoryProductPage({
 
 	return (
 		<section className="flex min-h-screen flex-col items-center justify-evenly p-4">
-			<pre>{`hello, you are on ${collection} on page number ${pageNumber}`}</pre>
+			{/* <pre>{`hello, you are on ${collection} on page number ${pageNumber}`}</pre> */}
 			{/* <ProductList products={products} showMore currentPage={Number(pageNumber)} /> */}
-			<CollectionList collection={products} />
+			<CollectionList collection={products} pageNumber={pageNumber} />
 		</section>
 	);
 }
