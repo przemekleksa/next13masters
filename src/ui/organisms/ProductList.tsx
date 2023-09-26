@@ -5,22 +5,22 @@ import { type ProductListItemFragment } from "@/gql/graphql";
 
 interface ProductListProps {
 	products: ProductListItemFragment[];
-	showMore?: boolean;
 	currentPage: number;
 	isPagination?: boolean;
+	dataTestId?: string;
 }
 
 export const ProductList = ({
 	products,
-	showMore,
 	currentPage,
 	isPagination = true,
+	dataTestId = "products-list",
 }: ProductListProps) => {
-	const totalPages = 10;
+	const totalPages = 6;
 	const basePath = "products/";
 	return (
 		<>
-			<ul className="grid grid-cols-1 grid-rows-2 gap-4 md:grid-cols-3" data-testid="products-list">
+			<ul className="grid grid-cols-1 grid-rows-1 gap-4 md:grid-cols-3" data-testid={dataTestId}>
 				{products.map((product) => (
 					<ProductListItem product={product} key={product.id} />
 				))}
@@ -28,7 +28,6 @@ export const ProductList = ({
 			{isPagination && (
 				<Pagination totalPages={totalPages} basePath={basePath} currentPage={currentPage} />
 			)}
-			{showMore && <button className="mt-6 rounded bg-black px-6 py-3 text-white">See More</button>}
 		</>
 	);
 };

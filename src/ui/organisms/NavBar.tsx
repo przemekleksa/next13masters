@@ -2,19 +2,20 @@ import React from "react";
 import { ShoppingCart } from "lucide-react";
 import { type Route } from "next";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
+import { SearchProduct } from "@/ui/atoms/SearchProduct";
 
 const navLinks = [
 	{ href: "/", label: "Home" },
 	{ href: "/products", label: "All" },
-	{ href: "/products/t-shirts", label: "T-Shirts" },
-	{ href: "/products/hoodies", label: "Hoodies" },
-	{ href: "/products/accessories", label: "Accessories" },
+	{ href: "/categories/t-shirts", label: "T-Shirts" },
+	{ href: "/categories/hoodies", label: "Hoodies" },
+	{ href: "/categories/accessories", label: "Accessories" },
 ];
 
 export const NavBar = () => {
 	return (
-		<div className="fixed flex w-full items-center justify-between bg-red-600 pb-2 ">
-			<ul className="mx-4 mt-2 flex justify-end gap-3">
+		<div className="fixed flex w-full items-center justify-between bg-red-600 pb-2 pt-2 ">
+			<ul className="mx-4  flex justify-end gap-3">
 				{navLinks.map(({ href, label }) => {
 					return (
 						<li key={href} className="cursor-pointer text-white ">
@@ -50,6 +51,7 @@ export const NavBar = () => {
 					</ActiveLink>
 				</li> */}
 			</ul>
+			<SearchProduct searchParams={{ search: "" }} />
 			<ShoppingCart className="mx-4 h-6 w-6 flex-shrink-0" />
 		</div>
 	);

@@ -1,0 +1,5 @@
+query ProductsGetListPage($skip: Int!) {
+	products(skip: $skip, first: 2) {
+		...ProductListItem
+	}
+}

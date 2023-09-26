@@ -15,7 +15,7 @@ export const Pagination = ({ currentPage, totalPages = 20, basePath }: Paginatio
 
 	return (
 		<div className="pagination flex w-1/2 justify-between rounded" aria-label="pagination">
-			{currentPage !== 1 && (
+			{currentPage > 1 && (
 				<button disabled={currentPage === 1}>
 					<Link href={`/${basePath}${currentPage - 1}`}>Previous</Link>
 				</button>
