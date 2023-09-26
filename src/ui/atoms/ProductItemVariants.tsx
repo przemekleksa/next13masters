@@ -11,8 +11,8 @@ interface ProductItemVariantsProps {
 }
 
 export const ProductItemVariants = ({ colors, sizes, className }: ProductItemVariantsProps) => {
-	const [selectedColor, setSelectedColor] = useState("");
-	const [selectedSize, setSelectedSize] = useState("");
+	const [, setSelectedColor] = useState("");
+	const [, setSelectedSize] = useState("");
 
 	if (!colors && !sizes) {
 		notFound();

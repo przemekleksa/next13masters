@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { ProductList } from "@/ui/organisms/ProductList";
-import { getProductsByCategorySlug, getProductsByPage } from "@/api/products";
+import { getProductsByPage } from "@/api/products";
 
 interface GenerateStaticParamsProps {
 	params: {
@@ -12,7 +12,7 @@ export const generateStaticParams = async ({ params }: GenerateStaticParamsProps
 	if (params.category === "tshirts") {
 		return [{ pageNumber: "1" }, { pageNumber: "2" }];
 	} else {
-		return [{ pageNumber: "1" }];
+		return [{ pageNumber: "1" }, { pageNumber: "2" }, { pageNumber: "3" }, { pageNumber: "4" }];
 	}
 };
 

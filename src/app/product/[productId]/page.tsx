@@ -15,7 +15,6 @@ interface ProductDetailsPageProps {
 export const generateStaticParams = async () => {
 	const products = await getProductsList();
 	return products.map((product) => ({ productId: product.id }));
-	// return products.map((product) => ({ productId: product.id })).slice(0, 3);
 };
 
 export const generateMetadata = async ({
