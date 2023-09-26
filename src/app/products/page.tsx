@@ -1,9 +1,8 @@
-import { getProductsList } from "@/api/products";
+import { getProductsByPage } from "@/api/products";
 import { ProductList } from "@/ui/organisms/ProductList";
 
 export default async function Products({ params }: { params: { pageNumber: string } }) {
-	// const products = await getProductsList({ numberOfProducts: 20 });
-	const products = await getProductsList();
+	const products = await getProductsByPage(0);
 	const { pageNumber } = params;
 
 	return (

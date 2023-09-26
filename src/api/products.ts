@@ -5,6 +5,8 @@ import {
 	ProductsGetListDocument,
 	ProductGetByIdDocument,
 	ProductVariantBySizeAndColorDocument,
+	ProductsGetListPageDocument,
+	ProductsSearchListDocument,
 } from "@/gql/graphql";
 
 export const getProductsList = async () => {
@@ -29,4 +31,14 @@ export const getProductVariantsById = async (productId: ProductListItemFragment[
 		id: productId,
 	});
 	return graphqlResponse;
+};
+
+export const getProductsByPage = async (page: number) => {
+	const graphqlResponse = await executeGraphql(ProductsGetListPageDocument, { skip: page });
+	return graphqlResponse.products;
+};
+
+export const getProductsSearch = async (search: string) => {
+	const graphqlResponse = await executeGraphql(ProductsSearchListDocument, { searchTerm: search });
+	return graphqlResponse.products;
 };

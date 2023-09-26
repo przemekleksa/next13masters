@@ -15,7 +15,7 @@ type ActiveLinkProps<T extends string> = {
 export const ActiveLink = <T extends string>({
 	href,
 	children,
-	exact = false,
+	// exact = false,
 	className = "hover:text-blue-600",
 	activeClassName = "border-b-2 border-yellow-200 text-yellow-200",
 }: ActiveLinkProps<T>) => {
@@ -25,7 +25,7 @@ export const ActiveLink = <T extends string>({
 		return null; //
 	}
 
-	console.log(pathname, href);
+	// console.log(pathname, href);
 
 	function comparePathnameAndHref(pathname: string, href: string) {
 		const pathnameParts = pathname.split("/");

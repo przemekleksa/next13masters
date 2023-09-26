@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { ProductList } from "@/ui/organisms/ProductList";
-import { getProductsByCategorySlug } from "@/api/products";
+import { getProductsByCategorySlug, getProductsByPage } from "@/api/products";
 
 interface GenerateStaticParamsProps {
 	params: {
@@ -23,12 +23,9 @@ export default async function SingleCategoryProductPage({
 }) {
 	const { pageNumber, category } = params;
 
-	// const products = await getProductsListByOffset({
-	// 	numberOfProducts: 20,
-	// 	offset: Number(pageNumber),
-	// });
+	const skipPages = Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2;
 
-	const products = await getProductsByCategorySlug(category);
+	const products = await getProductsByPage(skipPages);
 
 	if (!products) {
 		throw notFound();

@@ -10731,6 +10731,13 @@ export type ProductGetByIdQueryVariables = Exact<{
 
 export type ProductGetByIdQuery = { product?: { id: string, name: string, description: string, price: number, collections: Array<{ name: string }>, categories: Array<{ name: string }>, images: Array<{ url: string }> } | null };
 
+export type ProductsGetListPageQueryVariables = Exact<{
+  skip: Scalars['Int']['input'];
+}>;
+
+
+export type ProductsGetListPageQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
+
 export type ProductVariantBySizeAndColorQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
@@ -10760,6 +10767,13 @@ export type ProductsGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type ProductsGetListQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
+
+export type ProductsSearchListQueryVariables = Exact<{
+  searchTerm: Scalars['String']['input'];
+}>;
+
+
+export type ProductsSearchListQuery = { products: Array<{ id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -10889,6 +10903,24 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
   }
   price
 }`) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
+export const ProductsGetListPageDocument = new TypedDocumentString(`
+    query ProductsGetListPage($skip: Int!) {
+  products(skip: $skip, first: 2) {
+    ...ProductListItem
+  }
+}
+    fragment ProductListItem on Product {
+  id
+  name
+  description
+  categories(first: 1) {
+    name
+  }
+  images(first: 1) {
+    url
+  }
+  price
+}`) as unknown as TypedDocumentString<ProductsGetListPageQuery, ProductsGetListPageQueryVariables>;
 export const ProductVariantBySizeAndColorDocument = new TypedDocumentString(`
     query ProductVariantBySizeAndColor($id: ID!) {
   product(where: {id: $id}) {
@@ -10983,3 +11015,21 @@ fragment ProductListItem on Product {
   }
   price
 }`) as unknown as TypedDocumentString<ProductsGetListQuery, ProductsGetListQueryVariables>;
+export const ProductsSearchListDocument = new TypedDocumentString(`
+    query ProductsSearchList($searchTerm: String!) {
+  products(where: {name_contains: $searchTerm}) {
+    ...ProductListItem
+  }
+}
+    fragment ProductListItem on Product {
+  id
+  name
+  description
+  categories(first: 1) {
+    name
+  }
+  images(first: 1) {
+    url
+  }
+  price
+}`) as unknown as TypedDocumentString<ProductsSearchListQuery, ProductsSearchListQueryVariables>;
