@@ -33,6 +33,7 @@ export const generateMetadata = async ({
 export default async function ProductDetailsPage({
 	params, // searchParams,
 }: ProductDetailsPageProps) {
+	// const product = await getProductDetailsById(params.productId);
 	const product = await getProductDetailsById(params.productId);
 	const productVariants = await getProductVariantsById(params.productId);
 
