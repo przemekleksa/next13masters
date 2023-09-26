@@ -22,7 +22,7 @@ export const CollectionList = ({ collection, pageNumber }: CollectionListProps) 
 				<div>{collection[0].description}</div>
 			</div>
 
-			<ProductList products={collection[0].products} showMore currentPage={Number(pageNumber)} />
+			<ProductList products={collection[0].products} currentPage={Number(pageNumber)} />
 		</div>
 	);
 };

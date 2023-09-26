@@ -32,7 +32,7 @@ export default async function SingleCategoryProductPage({
 	return (
 		<section className="flex min-h-screen flex-col items-center justify-evenly p-4">
 			<pre>{`hello, you are on ${category} on page number ${pageNumber}`}</pre>
-			<ProductList products={products} showMore currentPage={Number(pageNumber)} />
+			<ProductList products={products} currentPage={Number(pageNumber)} />
 		</section>
 	);
 }

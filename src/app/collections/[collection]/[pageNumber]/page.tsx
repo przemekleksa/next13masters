@@ -29,8 +29,6 @@ export default async function SingleCategoryProductPage({
 
 	return (
 		<section className="flex min-h-screen flex-col items-center justify-evenly p-4">
-			{/* <pre>{`hello, you are on ${collection} on page number ${pageNumber}`}</pre> */}
-			{/* <ProductList products={products} showMore currentPage={Number(pageNumber)} /> */}
 			<CollectionList collection={products} pageNumber={pageNumber} />
 		</section>
 	);

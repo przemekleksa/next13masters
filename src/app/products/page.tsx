@@ -7,7 +7,7 @@ export default async function Products({ params }: { params: { pageNumber: strin
 
 	return (
 		<section className="flex min-h-screen flex-col items-center justify-evenly p-4">
-			<ProductList products={products} showMore currentPage={Number(pageNumber)} />
+			<ProductList products={products} currentPage={Number(pageNumber)} />
 		</section>
 	);
 }
