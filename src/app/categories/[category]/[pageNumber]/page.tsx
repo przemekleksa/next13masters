@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { type Metadata } from "next";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { getProductsByCategorySlug } from "@/api/products";
 
@@ -14,6 +15,18 @@ export const generateStaticParams = async ({ params }: GenerateStaticParamsProps
 	} else {
 		return [{ pageNumber: "1" }];
 	}
+};
+
+export const generateMetadata = async ({
+	params,
+}: {
+	params: { productId: string; category: string };
+}): Promise<Metadata> => {
+	return {
+		title: params.category,
+		description: params.category,
+		openGraph: { title: params.category, description: params.category },
+	};
 };
 
 export default async function SingleCategoryProductPage({

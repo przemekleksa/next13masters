@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { type Metadata } from "next";
 import { getProductsByCollectionSlug } from "@/api/collections";
 import { CollectionList } from "@/ui/organisms/CollectionList";
 
@@ -14,6 +15,18 @@ export const generateStaticParams = async ({ params }: GenerateStaticParamsProps
 	} else {
 		return [{ pageNumber: "1" }];
 	}
+};
+
+export const generateMetadata = async ({
+	params,
+}: {
+	params: { productId: string; collection: string };
+}): Promise<Metadata> => {
+	return {
+		title: params.collection,
+		description: params.collection,
+		openGraph: { title: params.collection, description: params.collection },
+	};
 };
 
 export default async function SingleCategoryProductPage({
