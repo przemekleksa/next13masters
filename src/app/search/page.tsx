@@ -8,7 +8,6 @@ export default async function Search({
 	params: { pageNumber: string; query: string };
 	searchParams: { [key: string]: string | string[] };
 }) {
-	console.log(searchParams.query);
 	const products = await getProductsSearch(searchParams.query as string);
 	const { pageNumber } = params;
 
