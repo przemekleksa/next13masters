@@ -9,13 +9,11 @@ export const SearchProduct = ({
 	searchParams: { [key: string]: string | string[] | undefined };
 }) => {
 	const router = useRouter();
-	const [searchQuery, setSearchQuery] = useState(
-		searchParams?.query?.toString().toLowerCase() || "",
-	);
+	const [searchQuery, setSearchQuery] = useState(searchParams?.query?.toString() || "");
 	const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const newQuery = e.target.value.toLowerCase();
+		const newQuery = e.target.value;
 		setSearchQuery(newQuery);
 
 		if (timer) {
@@ -43,10 +41,10 @@ export const SearchProduct = ({
 	}, [timer]);
 
 	return (
-		<form className="flex w-4" action={`/search`} onSubmit={handleSubmit} role="searchbox">
+		<form className="flex w-4" action={`/search`} onSubmit={handleSubmit}>
 			<div className="relative flex w-4">
 				<input
-					type="text"
+					type="search"
 					autoComplete="off"
 					value={searchQuery}
 					onChange={handleInputChange}
