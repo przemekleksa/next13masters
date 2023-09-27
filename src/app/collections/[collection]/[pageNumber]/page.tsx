@@ -5,12 +5,12 @@ import { CollectionList } from "@/ui/organisms/CollectionList";
 
 interface GenerateStaticParamsProps {
 	params: {
-		category: string;
+		collection: string;
 	};
 }
 
 export const generateStaticParams = async ({ params }: GenerateStaticParamsProps) => {
-	if (params.category === "tshirts") {
+	if (params.collection === "new-arrivals") {
 		return [{ pageNumber: "1" }, { pageNumber: "2" }];
 	} else {
 		return [{ pageNumber: "1" }];
@@ -20,12 +20,14 @@ export const generateStaticParams = async ({ params }: GenerateStaticParamsProps
 export const generateMetadata = async ({
 	params,
 }: {
-	params: { productId: string; collection: string };
+	params: { collection: string };
 }): Promise<Metadata> => {
+	const products = await getProductsByCollectionSlug(params.collection);
+
 	return {
-		title: params.collection,
-		description: params.collection,
-		openGraph: { title: params.collection, description: params.collection },
+		title: products[0]?.name,
+		description: products[0]?.description,
+		openGraph: { title: products[0]?.name, description: products[0]?.description as string },
 	};
 };
 
@@ -36,13 +38,15 @@ export default async function SingleCategoryProductPage({
 }) {
 	const { collection, pageNumber } = params;
 	const products = await getProductsByCollectionSlug(collection);
-	if (!products) {
+	if (!products[0]) {
 		throw notFound();
 	}
 
 	return (
-		<section className="flex min-h-screen flex-col items-center justify-evenly p-4">
-			<CollectionList collection={products} pageNumber={pageNumber} />
-		</section>
+		<>
+			<section className="flex min-h-screen flex-col items-center justify-evenly p-4">
+				<CollectionList collection={products} pageNumber={pageNumber} />
+			</section>
+		</>
 	);
 }
