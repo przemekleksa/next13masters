@@ -29,9 +29,11 @@ export default async function SingleCategoryProductPage({
 		throw notFound();
 	}
 
+	const CategoryTitle = category.charAt(0).toUpperCase() + category.slice(1);
+
 	return (
 		<section className="flex min-h-screen flex-col items-center justify-evenly p-4">
-			<h1 className="text-5xl">{category}</h1>
+			<h1 className="text-5xl">{CategoryTitle}</h1>
 			<ProductList products={products} currentPage={Number(pageNumber)} />
 		</section>
 	);
