@@ -20,10 +20,15 @@ export const generateStaticParams = async ({ params }: GenerateStaticParamsProps
 export const generateMetadata = async ({
 	params,
 }: {
-	params: { productId: string; category: string };
+	params: { category: string };
 }): Promise<Metadata> => {
+	const products = await getProductsByCategorySlug(params.category);
+	console.log(products);
+
+	const cat = params.category.charAt(0).toUpperCase() + params.category.slice(1);
+
 	return {
-		title: params.category,
+		title: cat,
 		description: params.category,
 		openGraph: { title: params.category, description: params.category },
 	};
