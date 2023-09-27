@@ -43,7 +43,7 @@ export const SearchProduct = ({
 	}, [timer]);
 
 	return (
-		<form className="flex w-4" action={`/search`} onSubmit={handleSubmit}>
+		<form className="flex w-4" action={`/search`} onSubmit={handleSubmit} role="searchbox">
 			<div className="relative flex w-4">
 				<input
 					type="text"

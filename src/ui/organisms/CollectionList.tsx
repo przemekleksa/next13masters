@@ -18,7 +18,9 @@ export const CollectionList = ({ collection, pageNumber }: CollectionListProps) 
 	return (
 		<div>
 			<div className="mb-6">
-				<h1 className="text-3xl">{collection[0].name}</h1>
+				<h1 className="text-3xl" role="heading">
+					{collection[0].name}
+				</h1>
 				<div>{collection[0].description}</div>
 			</div>
 
