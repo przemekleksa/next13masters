@@ -25,7 +25,7 @@ export const generateMetadata = async ({
 	const products = await getProductsByCollectionSlug(params.collection);
 
 	return {
-		title: products[0]?.name,
+		title: `${products[0]?.name}${products[0]?.description}`,
 		description: products[0]?.description,
 		openGraph: { title: products[0]?.name, description: products[0]?.description as string },
 	};
