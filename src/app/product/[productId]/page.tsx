@@ -1,21 +1,24 @@
 import { Suspense } from "react";
 import { type Metadata } from "next";
-import { getProductDetailsById, getProductVariantsById, getProductsList } from "@/api/products";
+import { revalidateTag } from "next/cache";
+import { getProductDetailsById, getProductVariantsById } from "@/api/products";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductItemDescription } from "@/ui/atoms/ProductItemDescription";
 import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
 import { Spinner } from "@/ui/atoms/Spinner";
 import { ProductItemVariants } from "@/ui/atoms/ProductItemVariants";
+import { AddToCartButton } from "@/ui/atoms/AddToCartButton";
+import { getOrCreateCart, addToCart } from "@/api/cart";
 
 interface ProductDetailsPageProps {
 	params: { productId: string };
 	searchParams: { [key: string]: string | string[] };
 }
 
-export const generateStaticParams = async () => {
-	const products = await getProductsList();
-	return products.map((product) => ({ productId: product.id }));
-};
+// export const generateStaticParams = async () => {
+// 	const products = await getProductsList();
+// 	return products.map((product) => ({ productId: product.id }));
+// };
 
 export const generateMetadata = async ({
 	params,
@@ -33,7 +36,6 @@ export const generateMetadata = async ({
 export default async function ProductDetailsPage({
 	params, // searchParams,
 }: ProductDetailsPageProps) {
-	// const product = await getProductDetailsById(params.productId);
 	const product = await getProductDetailsById(params.productId);
 	const productVariants = await getProductVariantsById(params.productId);
 
@@ -44,6 +46,16 @@ export default async function ProductDetailsPage({
 	const sizes = Array.from(
 		new Set(productVariants.productSizeColorVariants.map((variant) => variant.size)),
 	);
+
+	async function addProductToCartAction(_formData: FormData) {
+		"use server";
+
+		const cart = await getOrCreateCart();
+		// console.log(cart);
+		await addToCart(cart.id, params.productId);
+
+		revalidateTag("cart");
+	}
 
 	if (!product) {
 		return <Spinner />;
@@ -58,6 +70,9 @@ export default async function ProductDetailsPage({
 					sizes={sizes}
 					className="grid-item col-start-2 row-start-2"
 				/>
+				<form className="flex w-full justify-center" action={addProductToCartAction}>
+					<AddToCartButton productId={product.id} />
+				</form>
 			</article>
 			<aside className="mt-16 flex justify-center">
 				<Suspense fallback={<Spinner />}>
