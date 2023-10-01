@@ -5,6 +5,7 @@ import { type Metadata } from "next";
 import { getCartFromCookies } from "@/api/cart";
 import { formatPrice } from "@/ui/utlis";
 import { IncrementProductQuantity } from "@/app/cart/IncrementProductQuantity";
+import { RemoveButton } from "@/app/cart/RemoveButton";
 
 export const generateMetadata = async (): Promise<Metadata> => {
 	return {
@@ -36,6 +37,7 @@ export default async function CartPage() {
 						<th>Product</th>
 						<th className="px-4 text-center">Quantity</th>
 						<th>Price</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -49,7 +51,10 @@ export default async function CartPage() {
 								<td className="flex items-center justify-center text-center">
 									<IncrementProductQuantity quantity={item.quantity} itemId={item.id} />
 								</td>
-								<td>{formatPrice(item.product.price / 100)}</td>
+								<td>{formatPrice((item.product.price / 100) * item.quantity)}</td>
+								<td>
+									<RemoveButton itemId={item.product.id} />
+								</td>
 							</tr>
 						);
 					})}

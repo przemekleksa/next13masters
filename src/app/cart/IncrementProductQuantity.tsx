@@ -11,7 +11,7 @@ export const IncrementProductQuantity = ({
 	quantity: number;
 }) => {
 	const [optimisticQuantity, setOptimisticQuantity] = useOptimistic(quantity);
-	console.log(optimisticQuantity);
+	// console.log(optimisticQuantity);
 	return (
 		<>
 			{optimisticQuantity}

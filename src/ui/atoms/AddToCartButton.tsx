@@ -8,7 +8,7 @@ interface AddToCartButtonProps {
 export const AddToCartButton = ({ productId }: AddToCartButtonProps) => {
 	const formStatus = useFormStatus();
 	formStatus.pending;
-	console.log(productId);
+	// console.log(productId);
 
 	return (
 		<>
