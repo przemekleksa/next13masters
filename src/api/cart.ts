@@ -29,7 +29,7 @@ export async function getOrCreateCart(): Promise<CartFragment> {
 export async function getCartFromCookies() {
 	const cartId = cookies().get("cardId")?.value;
 	if (cartId) {
-		const cart = await executeGraphql(CartGetByIdDocument, { id: cartId });
+		const cart = await executeGraphql({ query: CartGetByIdDocument, variables: { id: cartId } });
 		if (cart.order) {
 			return cart.order;
 		}
@@ -37,17 +37,26 @@ export async function getCartFromCookies() {
 }
 
 function createCart() {
-	return executeGraphql(CartCreateDocument, {});
+	return executeGraphql({ query: CartCreateDocument, variables: {} });
 }
 
 export async function addToCart(orderId: string, productId: string) {
-	const { product } = await executeGraphql(ProductGetByIdDocument, { id: productId });
+	const { product } = await executeGraphql({
+		query: ProductGetByIdDocument,
+		variables: { id: productId },
+	});
 	if (!product) {
 		throw new Error("Product not found");
 	}
-	await executeGraphql(CartAddProductDocument, {
-		orderId,
-		productId,
-		total: product.price,
+	await executeGraphql({
+		query: CartAddProductDocument,
+		variables: {
+			orderId,
+			productId,
+			total: product.price,
+		},
+		next: {
+			tags: ["cart"],
+		},
 	});
 }

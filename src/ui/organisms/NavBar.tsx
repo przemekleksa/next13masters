@@ -16,6 +16,7 @@ const navLinks = [
 export const NavBar = async () => {
 	const cart = await getCartFromCookies();
 	const quantity = cart?.orderItems.length ?? 0;
+
 	return (
 		<div className="fixed flex w-full items-center justify-between bg-red-600 pb-2 pt-2 ">
 			<ul className="mx-4  flex justify-end gap-3">
