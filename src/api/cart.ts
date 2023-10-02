@@ -34,6 +34,15 @@ export async function getCartFromCookies() {
 			return cart.order;
 		}
 	}
+
+	// const cartId = cookies().get("cartId")?.value;
+	// const cart = cartId
+	// 	? await executeGraphql({ query: CartGetByIdDocument, variables: { id: cartId } })
+	// 	: null;
+	// if (cart?.order) {
+	// 	return cart.order;
+	// }
+	// // const count = cart?.order?.orderItems.length || 0;
 }
 
 function createCart() {

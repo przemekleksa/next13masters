@@ -3,19 +3,19 @@ import { type Metadata } from "next";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { getProductsByCategorySlug } from "@/api/products";
 
-interface GenerateStaticParamsProps {
-	params: {
-		category: string;
-	};
-}
+// interface GenerateStaticParamsProps {
+// 	params: {
+// 		category: string;
+// 	};
+// }
 
-export const generateStaticParams = async ({ params }: GenerateStaticParamsProps) => {
-	if (params.category === "tshirts") {
-		return [{ pageNumber: "1" }, { pageNumber: "2" }];
-	} else {
-		return [{ pageNumber: "1" }];
-	}
-};
+// export const generateStaticParams = async ({ params }: GenerateStaticParamsProps) => {
+// 	if (params.category === "tshirts") {
+// 		return [{ pageNumber: "1" }, { pageNumber: "2" }];
+// 	} else {
+// 		return [{ pageNumber: "1" }];
+// 	}
+// };
 
 export const generateMetadata = async ({
 	params,

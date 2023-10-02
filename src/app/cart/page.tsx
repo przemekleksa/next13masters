@@ -18,16 +18,15 @@ export const generateMetadata = async (): Promise<Metadata> => {
 export default async function CartPage() {
 	const cart = await getCartFromCookies();
 	// console.log(cart);
-	// const cartId = cookies().get("cartId")?.value;
-	// console.log(cartId);
-	// // if (!cartId) {
-	// 	redirect("/");
-	// }
-
-	if (!cart) {
+	if (!cart || cart.orderItems.length === 0) {
+		// console.log(cart?.orderItems.length, "133142345 ");
 		redirect("/");
 	}
-	console.log(cart);
+
+	// if (!cart) {
+	// 	redirect("/");
+	// }
+	// console.log(cart);
 	return (
 		<div className="mt-10">
 			<h1>Order #{cart.id} summary</h1>
