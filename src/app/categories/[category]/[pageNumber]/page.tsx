@@ -22,8 +22,8 @@ export const generateMetadata = async ({
 }: {
 	params: { category: string };
 }): Promise<Metadata> => {
-	const products = await getProductsByCategorySlug(params.category);
-	console.log(products);
+	// const products = await getProductsByCategorySlug(params.category);
+	// console.log(products);
 
 	const cat = params.category.charAt(0).toUpperCase() + params.category.slice(1);
 
