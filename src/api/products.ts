@@ -10,7 +10,11 @@ import {
 } from "@/gql/graphql";
 
 export const getProductsList = async () => {
-	const graphqlResponse = await executeGraphql({ query: ProductsGetListDocument, variables: {} });
+	const graphqlResponse = await executeGraphql({
+		query: ProductsGetListDocument,
+		variables: {},
+		next: { revalidate: 15 },
+	});
 	return graphqlResponse.products;
 };
 

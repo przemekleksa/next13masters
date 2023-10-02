@@ -8,7 +8,6 @@ export const changeItemQuantity = (itemId: string, quantity: number) => {
 };
 
 export const removeItem = (itemId: string) => {
-	console.log(itemId);
 	return executeGraphql({
 		query: CartRemoveProductDocument,
 		variables: { itemId },

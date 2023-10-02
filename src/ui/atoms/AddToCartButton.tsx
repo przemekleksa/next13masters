@@ -1,14 +1,9 @@
 "use client";
 import { experimental_useFormStatus as useFormStatus } from "react-dom";
 
-interface AddToCartButtonProps {
-	productId: string;
-}
-
-export const AddToCartButton = ({ productId }: AddToCartButtonProps) => {
+export const AddToCartButton = () => {
 	const formStatus = useFormStatus();
 	formStatus.pending;
-	// console.log(productId);
 
 	return (
 		<>

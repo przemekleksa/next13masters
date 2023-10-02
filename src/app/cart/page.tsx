@@ -27,7 +27,7 @@ export default async function CartPage() {
 	if (!cart) {
 		redirect("/");
 	}
-
+	console.log(cart);
 	return (
 		<div className="mt-10">
 			<h1>Order #{cart.id} summary</h1>
@@ -53,7 +53,7 @@ export default async function CartPage() {
 								</td>
 								<td>{formatPrice((item.product.price / 100) * item.quantity)}</td>
 								<td>
-									<RemoveButton itemId={item.product.id} />
+									<RemoveButton itemId={item.id} />
 								</td>
 							</tr>
 						);

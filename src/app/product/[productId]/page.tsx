@@ -71,7 +71,7 @@ export default async function ProductDetailsPage({
 					className="grid-item col-start-2 row-start-2"
 				/>
 				<form className="flex w-full justify-center" action={addProductToCartAction}>
-					<AddToCartButton productId={product.id} />
+					<AddToCartButton />
 				</form>
 			</article>
 			<aside className="mt-16 flex justify-center">
