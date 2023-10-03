@@ -3,19 +3,19 @@ import { type Metadata } from "next";
 import { getProductsByCollectionSlug } from "@/api/collections";
 import { CollectionList } from "@/ui/organisms/CollectionList";
 
-interface GenerateStaticParamsProps {
-	params: {
-		collection: string;
-	};
-}
+// interface GenerateStaticParamsProps {
+// 	params: {
+// 		collection: string;
+// 	};
+// }
 
-export const generateStaticParams = async ({ params }: GenerateStaticParamsProps) => {
-	if (params.collection === "new-arrivals") {
-		return [{ pageNumber: "1" }, { pageNumber: "2" }];
-	} else {
-		return [{ pageNumber: "1" }];
-	}
-};
+// export const generateStaticParams = async ({ params }: GenerateStaticParamsProps) => {
+// 	if (params.collection === "new-arrivals") {
+// 		return [{ pageNumber: "1" }, { pageNumber: "2" }];
+// 	} else {
+// 		return [{ pageNumber: "1" }];
+// 	}
+// };
 
 export const generateMetadata = async ({
 	params,
