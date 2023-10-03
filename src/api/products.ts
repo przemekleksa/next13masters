@@ -13,7 +13,7 @@ export const getProductsList = async () => {
 	const graphqlResponse = await executeGraphql({
 		query: ProductsGetListDocument,
 		variables: {},
-		next: { revalidate: 15 },
+		next: { revalidate: 5 },
 	});
 	return graphqlResponse.products;
 };
@@ -22,6 +22,8 @@ export const getProductDetailsById = async (productId: ProductListItemFragment["
 	const graphqlResponse = await executeGraphql({
 		query: ProductGetByIdDocument,
 		variables: { id: productId },
+		next: { revalidate: 1 },
+		// cache: "no-store",
 	});
 	return graphqlResponse.product;
 };
