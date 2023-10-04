@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				<nav role="navigation">
 					<NavBar />
 				</nav>
-				<section className="lg:max-w-7x; mx-auto max-w-md p-4 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:p-12">
+				<section className="lg:max-w-7x;  mx-auto max-w-md p-4 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:p-12 lg:pt-20">
 					{children}
 				</section>
 				<footer>
