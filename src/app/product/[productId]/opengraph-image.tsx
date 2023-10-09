@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { ImageResponse } from "next/server";
 import { notFound } from "next/navigation";
 import { getProductDetailsById } from "@/api/products";

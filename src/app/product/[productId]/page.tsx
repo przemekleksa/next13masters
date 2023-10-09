@@ -1,7 +1,11 @@
 import { Suspense } from "react";
 import { type Metadata } from "next";
 import { revalidateTag } from "next/cache";
-import { getProductDetailsById, getProductVariantsById } from "@/api/products";
+import {
+	getProductDetailsById,
+	getProductReviewById,
+	getProductVariantsById,
+} from "@/api/products";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductItemDescription } from "@/ui/atoms/ProductItemDescription";
 import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
@@ -9,6 +13,8 @@ import { Spinner } from "@/ui/atoms/Spinner";
 import { ProductItemVariants } from "@/ui/atoms/ProductItemVariants";
 import { AddToCartButton } from "@/ui/atoms/AddToCartButton";
 import { getOrCreateCart, addToCart } from "@/api/cart";
+import { Reviews } from "@/ui/atoms/Reviews";
+import { AddReview } from "@/ui/atoms/AddReview";
 
 interface ProductDetailsPageProps {
 	params: { productId: string };
@@ -38,6 +44,7 @@ export default async function ProductDetailsPage({
 }: ProductDetailsPageProps) {
 	const product = await getProductDetailsById(params.productId);
 	const productVariants = await getProductVariantsById(params.productId);
+	const productReviews = await getProductReviewById(params.productId);
 
 	const colors = Array.from(
 		new Set(productVariants.productSizeColorVariants.map((variant) => variant.color)),
@@ -60,6 +67,7 @@ export default async function ProductDetailsPage({
 	if (!product) {
 		return <Spinner />;
 	}
+
 	return (
 		<>
 			<article className="grid grid-cols-2 justify-center">
@@ -73,6 +81,12 @@ export default async function ProductDetailsPage({
 				<form className="flex w-full justify-center" action={addProductToCartAction}>
 					<AddToCartButton />
 				</form>
+				<div className="col-span-2 grid grid-cols-2 justify-between gap-10">
+					{productReviews && productReviews.reviews.length > 0 && (
+						<Reviews reviews={productReviews.reviews} />
+					)}
+					<AddReview productId={params.productId} />
+				</div>
 			</article>
 			<aside className="mt-16 flex justify-center">
 				<Suspense fallback={<Spinner />}>

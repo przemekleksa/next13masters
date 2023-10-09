@@ -7,6 +7,8 @@ import {
 	ProductVariantBySizeAndColorDocument,
 	ProductsGetListPageDocument,
 	ProductsSearchListDocument,
+	ProductGetReviewByProductIdDocument,
+	ProductAddReviewDocument,
 } from "@/gql/graphql";
 
 export const getProductsList = async () => {
@@ -62,4 +64,35 @@ export const getProductsSearch = async (search: string) => {
 		variables: { searchTerm: search },
 	});
 	return graphqlResponse.products;
+};
+
+export const getProductReviewById = async (productId: ProductListItemFragment["id"]) => {
+	const graphqlResponse = await executeGraphql({
+		query: ProductGetReviewByProductIdDocument,
+		variables: { id: productId },
+		next: { revalidate: 1 },
+		// cache: "no-store",
+	});
+	return graphqlResponse.product;
+};
+
+export const addReviewByProductId = async (
+	productId: ProductListItemFragment["id"],
+	data: { headline: string; name: string; email: string; content: string; rating: number },
+) => {
+	await executeGraphql({
+		query: ProductAddReviewDocument,
+		variables: {
+			id: productId,
+			headline: data.headline,
+			email: data.email,
+			name: data.name,
+			content: data.content,
+			rating: data.rating,
+		},
+		cache: "no-store",
+		next: {
+			tags: ["cart"],
+		},
+	});
 };
