@@ -1,9 +1,6 @@
-import { ShoppingCart } from "lucide-react";
 import { type Route } from "next";
-import Link from "next/link";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 import { SearchProduct } from "@/ui/atoms/SearchProduct";
-import { getCartFromCookies } from "@/api/cart";
 
 const navLinks = [
 	{ href: "/", label: "Home" },
@@ -14,8 +11,8 @@ const navLinks = [
 ];
 
 export const NavBar = async () => {
-	const cart = await getCartFromCookies();
-	const quantity = cart?.orderItems.length ?? 0;
+	// const cart = await getCartFromCookies();
+	// const quantity = cart?.orderItems.length ?? 0;
 
 	const env = process.env.NODE_ENV;
 	if (env == "development") {
@@ -25,7 +22,7 @@ export const NavBar = async () => {
 	}
 
 	return (
-		<div className="fixed flex w-full items-center justify-between bg-red-600 pb-2 pt-2 ">
+		<div className="flex items-center" data-testId="navigation" role="navigation">
 			<ul className="mx-4  flex justify-end gap-3">
 				{navLinks.map(({ href, label }) => {
 					return (
@@ -64,10 +61,7 @@ export const NavBar = async () => {
 				</li> */}
 			</ul>
 			<SearchProduct searchParams={{ search: "" }} />
-			<Link href={"/cart" as Route<string>} className="flex">
-				<div>{quantity}</div>
-				<ShoppingCart className="mx-4 h-6 w-6 flex-shrink-0" />
-			</Link>
+
 			{/* <div className="flex"></div> */}
 		</div>
 	);

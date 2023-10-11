@@ -25,7 +25,7 @@ const documents = {
     "fragment CollectionsListFragment on Collection {\n  id\n  name\n  description\n  slug\n  image {\n    url\n    size\n    width\n    height\n  }\n}": types.CollectionsListFragmentFragmentDoc,
     "mutation ProductAddReview($id: ID!, $headline: String!, $name: String!, $email: String!, $content: String!, $rating: Int!) {\n  createReview(\n    data: {headline: $headline, name: $name, email: $email, content: $content, rating: $rating, product: {connect: {id: $id}}}\n  ) {\n    id\n  }\n}": types.ProductAddReviewDocument,
     "query ProductGetById($id: ID!) {\n  product(where: {id: $id}) {\n    ...ProductListItem\n    collections {\n      name\n    }\n  }\n}": types.ProductGetByIdDocument,
-    "query ProductsGetListPage($skip: Int!) {\n  products(skip: $skip, first: 2) {\n    ...ProductListItem\n  }\n}": types.ProductsGetListPageDocument,
+    "query ProductsGetListPage($skip: Int!) {\n  products(skip: $skip, first: 4) {\n    ...ProductListItem\n  }\n}": types.ProductsGetListPageDocument,
     "query ProductGetReviewByProductId($id: ID!) {\n  product(where: {id: $id}) {\n    ...ProductReview\n  }\n}": types.ProductGetReviewByProductIdDocument,
     "query ProductVariantBySizeAndColor($id: ID!) {\n  product(where: {id: $id}) {\n    name\n    id\n  }\n  productColorVariants {\n    color\n    name\n    id\n  }\n  productSizeColorVariants {\n    color\n    size\n    name\n    id\n  }\n}": types.ProductVariantBySizeAndColorDocument,
     "fragment ProductListFragment on Query {\n  products(first: 20) {\n    ...ProductListItem\n  }\n}": types.ProductListFragmentFragmentDoc,
@@ -84,7 +84,7 @@ export function graphql(source: "query ProductGetById($id: ID!) {\n  product(whe
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGetListPage($skip: Int!) {\n  products(skip: $skip, first: 2) {\n    ...ProductListItem\n  }\n}"): typeof import('./graphql').ProductsGetListPageDocument;
+export function graphql(source: "query ProductsGetListPage($skip: Int!) {\n  products(skip: $skip, first: 4) {\n    ...ProductListItem\n  }\n}"): typeof import('./graphql').ProductsGetListPageDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

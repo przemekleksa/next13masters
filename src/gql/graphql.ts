@@ -11067,7 +11067,7 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
 }`) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
 export const ProductsGetListPageDocument = new TypedDocumentString(`
     query ProductsGetListPage($skip: Int!) {
-  products(skip: $skip, first: 2) {
+  products(skip: $skip, first: 4) {
     ...ProductListItem
   }
 }
