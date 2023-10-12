@@ -57,11 +57,6 @@ export default async function CartPage() {
 							</tr>
 						);
 					})}
-					<tr>
-						<td colSpan={3} className="flex justify-end">
-							hehe
-						</td>
-					</tr>
 				</tbody>
 			</table>
 			<form action={handlePaymentAction}>

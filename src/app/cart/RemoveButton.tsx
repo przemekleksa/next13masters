@@ -17,7 +17,6 @@ export const RemoveButton = ({ itemId }: RemoveButtonProps) => {
 			className="text-red-500 disabled:text-slate-500"
 			disabled={isPending}
 			onClick={() => {
-				// console.log("remove", itemId);
 				startTransition(async () => {
 					await removeItem(itemId);
 					router.refresh();

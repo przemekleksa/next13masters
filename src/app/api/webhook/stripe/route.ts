@@ -27,8 +27,6 @@ export async function POST(request: NextRequest): Promise<Response> {
 		process.env.STRIPE_WEBHOOK_SECRET,
 	) as Stripe.DiscriminatedEvent;
 
-	console.log(event, "event"); //why nothing is logged?
-
 	switch (event.type) {
 		case "checkout.session.completed": {
 			event.data.object.metadata?.cartId;
