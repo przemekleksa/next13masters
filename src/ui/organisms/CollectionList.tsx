@@ -23,7 +23,11 @@ export const CollectionList = ({ collection, pageNumber }: CollectionListProps) 
 				<div></div>
 			</div>
 
-			<ProductList products={collection[0].products} currentPage={Number(pageNumber)} />
+			<ProductList
+				products={collection[0].products}
+				currentPage={Number(pageNumber)}
+				isPagination={false}
+			/>
 		</div>
 	);
 };

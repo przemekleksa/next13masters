@@ -1,5 +1,3 @@
-import React from "react";
-import { ShoppingCart } from "lucide-react";
 import { type Route } from "next";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 import { SearchProduct } from "@/ui/atoms/SearchProduct";
@@ -12,9 +10,19 @@ const navLinks = [
 	{ href: "/categories/accessories", label: "Accessories" },
 ];
 
-export const NavBar = () => {
+export const NavBar = async () => {
+	// const cart = await getCartFromCookies();
+	// const quantity = cart?.orderItems.length ?? 0;
+
+	const env = process.env.NODE_ENV;
+	if (env == "development") {
+		// do something
+	} else if (env == "production") {
+		// do something
+	}
+
 	return (
-		<div className="fixed flex w-full items-center justify-between bg-red-600 pb-2 pt-2 ">
+		<div className="flex items-center" data-testId="navigation" role="navigation">
 			<ul className="mx-4  flex justify-end gap-3">
 				{navLinks.map(({ href, label }) => {
 					return (
@@ -25,6 +33,7 @@ export const NavBar = () => {
 						</li>
 					);
 				})}
+				{env == "development" ? <div>dev</div> : <div>prod</div>}
 				{/* <li className="cursor-pointer text-blue-300 hover:text-blue-600">
 					<ActiveLink href="/" exact>
 						Home
@@ -52,7 +61,8 @@ export const NavBar = () => {
 				</li> */}
 			</ul>
 			<SearchProduct searchParams={{ search: "" }} />
-			<ShoppingCart className="mx-4 h-6 w-6 flex-shrink-0" />
+
+			{/* <div className="flex"></div> */}
 		</div>
 	);
 };
