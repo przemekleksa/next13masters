@@ -7,8 +7,11 @@ import { executeGraphql } from "@/api/graphqlApi";
 import { CartRemoveProductDocument, CartSetProductQuantityDocument } from "@/gql/graphql";
 import { getCartFromCookies } from "@/api/cart";
 
-export const changeItemQuantity = (itemId: string, quantity: number) => {
-	return executeGraphql({ query: CartSetProductQuantityDocument, variables: { itemId, quantity } });
+export const changeItemQuantity = (itemId: string, quantity: number, price: number) => {
+	return executeGraphql({
+		query: CartSetProductQuantityDocument,
+		variables: { itemId, quantity, total: price * quantity },
+	});
 };
 
 export const removeItem = (itemId: string) => {

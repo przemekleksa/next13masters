@@ -6,9 +6,11 @@ import { changeItemQuantity } from "@/app/cart/actions";
 export const ChangeProductQuantity = ({
 	itemId,
 	quantity,
+	price,
 }: {
 	itemId: string;
 	quantity: number;
+	price: number;
 }) => {
 	const [optimisticQuantity, setOptimisticQuantity] = useOptimistic(quantity);
 
@@ -18,7 +20,7 @@ export const ChangeProductQuantity = ({
 				className="ml-4 h-8 w-8 border bg-slate-300 hover:cursor-pointer hover:bg-slate-100"
 				onClick={async () => {
 					setOptimisticQuantity(optimisticQuantity - 1);
-					await changeItemQuantity(itemId, optimisticQuantity - 1);
+					await changeItemQuantity(itemId, optimisticQuantity - 1, price);
 				}}
 				data-testId="decrement"
 			>
@@ -29,7 +31,7 @@ export const ChangeProductQuantity = ({
 				className="ml-4 h-8 w-8 border bg-slate-300 hover:cursor-pointer hover:bg-slate-100"
 				onClick={async () => {
 					setOptimisticQuantity(optimisticQuantity + 1);
-					await changeItemQuantity(itemId, optimisticQuantity + 1);
+					await changeItemQuantity(itemId, optimisticQuantity + 1, price);
 				}}
 				data-testId="increment"
 			>

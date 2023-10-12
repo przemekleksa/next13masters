@@ -6,6 +6,7 @@ import {
 	CartCreateDocument,
 	ProductGetByIdDocument,
 	CartAddProductDocument,
+	CartSetProductQuantityDocument,
 } from "@/gql/graphql";
 
 export async function getOrCreateCart(): Promise<CartFragment> {
@@ -46,6 +47,27 @@ function createCart() {
 }
 
 export async function addToCart(orderId: string, productId: string) {
+	const cart = await getCartFromCookies();
+
+	const productExistsInCart = cart?.orderItems.some((item) => item.product!.id === productId);
+
+	console.log(productExistsInCart);
+
+	if (productExistsInCart) {
+		console.log("product is already in cart");
+		cart?.orderItems.map((item) => {
+			return executeGraphql({
+				query: CartSetProductQuantityDocument,
+				variables: {
+					itemId: item.id,
+					quantity: item.quantity + 1,
+					total: item.total * item.quantity,
+				},
+			});
+		});
+		return;
+	}
+
 	const { product } = await executeGraphql({
 		query: ProductGetByIdDocument,
 		variables: { id: productId },

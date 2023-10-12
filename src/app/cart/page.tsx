@@ -5,7 +5,7 @@ import { type Metadata } from "next";
 
 import { getCartFromCookies } from "@/api/cart";
 import { formatPrice } from "@/ui/utlis";
-import { ChangeProductQuantity } from "@/app/cart/IncrementProductQuantity";
+import { ChangeProductQuantity } from "@/app/cart/ChangeProductQuantity";
 import { RemoveButton } from "@/app/cart/RemoveButton";
 import { handlePaymentAction } from "@/app/cart/actions";
 
@@ -44,7 +44,11 @@ export default async function CartPage() {
 							<tr key={item.product.id + Math.random()} className="gap-3">
 								<td>{item.product.name}</td>
 								<td className="flex items-center justify-center text-center">
-									<ChangeProductQuantity quantity={item.quantity} itemId={item.id} />
+									<ChangeProductQuantity
+										quantity={item.quantity}
+										itemId={item.id}
+										price={item.product.price}
+									/>
 								</td>
 								<td>{formatPrice((item.product.price / 100) * item.quantity)}</td>
 								<td>
